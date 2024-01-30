@@ -61,9 +61,9 @@ public class QuizStuInfo {
 
 		String sql = "select * from stuinfo order by num";
 
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
+		Connection conn = null;//db연결하는거 도와줌
+		Statement stmt = null;//db명령 내리기 위함//쿼리 작업을 실행하기 위한 객체
+		ResultSet rs = null;//db결과값을 반환,저장 //select의 결과를 저장하는 객체 
 
 		conn = db.getOracle();
 		try {
@@ -117,7 +117,36 @@ public class QuizStuInfo {
 		}
 
 	}
-	
+	////////////수정 할 데이터 조회
+	public boolean getOnedata(String num)
+	{
+		boolean flag = false;
+		
+		String sql = "select * from Stuinfo where num=" + num;
+		
+		Connection conn=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		
+		conn=db.getOracle();
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery(sql);
+			
+			if(rs.next())
+				flag = true;
+			else
+				flag=false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(rs, stmt, conn);
+		}
+		
+		return flag;
+		
+	}
 	///////////////////////////////////////////////
 	public void update() {
 		
@@ -126,6 +155,46 @@ public class QuizStuInfo {
 		
 		System.out.println("수정할 번호 입력하세요");
 		num=sc.nextLine();
+		
+
+		if (!getOnedata(num))// if(!this.getOnedata(num))
+		{
+			System.out.println("해당번호는 존재하지 않습니다");
+			return;// 메서드종료
+		}
+		
+		System.out.println("수정할 이름 입력");
+		s_name=sc.nextLine();
+		System.out.println("수정할 성별 입력");
+		s_gender=sc.nextLine();
+		System.out.println("수정할 핸드폰 번호 입력");
+		s_hp=sc.nextLine();
+		System.out.println("수정할 나이 입력");
+		s_age=sc.nextLine();
+		
+		String sql ="update Stuinfo set s_name='"+s_name+"',s_gender='"+s_gender+"',s_hp='"+s_hp+"'s_age='"+s_age+"'where num="+num;
+		System.out.println(sql);
+		
+		Connection conn=null;
+		Statement stmt=null;
+		
+		conn=db.getOracle();
+		try {
+			stmt=conn.createStatement();
+			
+			int a=stmt.executeUpdate(sql);
+			
+			if(a==0)
+				System.out.println("수정할 데이터없음");
+			else
+				System.out.println("수정완료!!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(stmt, conn);
+		}
+		
 		
 	}
 
@@ -148,6 +217,8 @@ public class QuizStuInfo {
 				stuinfo.select();
 			}else if (n == 3) {
 				stuinfo.delete();
+			}else if(n==4) {
+				stuinfo.update();
 			}else if (n==9) {
 			System.out.println("종료");
 			break;

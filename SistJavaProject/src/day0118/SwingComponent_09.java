@@ -67,7 +67,7 @@ public class SwingComponent_09 extends JFrame {
 		lbl3.setBorder(new TitledBorder("쌍용교육"));
 		this.add(lbl3);
 		
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy년 mm월 dd일 HH시 mm분");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
 		
 		lbl4=new JLabel(sdf.format(new Date()),icon1,JLabel.CENTER);
 		lbl4.setBounds(10,210,200,30);

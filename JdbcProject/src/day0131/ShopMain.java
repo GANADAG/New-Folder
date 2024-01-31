@@ -54,6 +54,7 @@ public class ShopMain extends JFrame implements ActionListener {
 			System.out.println("update");
 		} else if (ob == btnList) {
 			System.out.println("list");
+			ShopListForm listForm=new ShopListForm();		
 		}
 
 	}

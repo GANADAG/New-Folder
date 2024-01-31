@@ -62,7 +62,7 @@ public class ShopDbModel {
 				
 				dto.setNum(rs.getString("num"));
 				dto.setSangpum(rs.getString("sangpum"));
-				dto.setPhoto(rs.getString("photp"));
+				dto.setPhoto(rs.getString("photo"));
 				dto.setSu(rs.getInt("su"));
 				dto.setDan(rs.getInt("dan"));
 				dto.setGuipday(rs.getDate("guipday"));

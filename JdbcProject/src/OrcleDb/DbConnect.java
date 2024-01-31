@@ -18,7 +18,7 @@ public class DbConnect {
       Connection conn=null;
       
       try {
-         conn=DriverManager.getConnection(ORACLE_DB, "dlguswn", "a1234");
+         conn=DriverManager.getConnection(ORACLE_DB, "kiosk", "a1234");
       } catch (SQLException e) {
          // TODO Auto-generated catch block
          //e.printStackTrace();
